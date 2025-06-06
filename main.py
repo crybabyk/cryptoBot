@@ -75,7 +75,6 @@ class CryptoBotApp:
         ]
         return "\n".join(report)
 
-
 if __name__ == "__main__":
     root = tk.Tk()
     app = CryptoBotApp(root)
