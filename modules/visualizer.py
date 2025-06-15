@@ -1,9 +1,10 @@
+
 import matplotlib.pyplot as plt
 import pandas as pd
+import os
 
-
-def show_order_book(order_book, pair='BTC/USDT'):
-    """Отображение стакана ордеров"""
+def plot_order_book(order_book, pair='BTC/USDT', save_path=None):
+    """Построение и сохранение графика стакана ордеров"""
     if not order_book:
         return
 
@@ -17,4 +18,8 @@ def show_order_book(order_book, pair='BTC/USDT'):
     plt.xlabel('Price')
     plt.ylabel('Amount')
     plt.legend()
-    plt.show()
+
+    if save_path:
+        plt.savefig(save_path)
+    else:
+        plt.show()
