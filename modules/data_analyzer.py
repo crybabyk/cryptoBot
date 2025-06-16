@@ -14,17 +14,14 @@ def detect_whales(order_book, threshold=0.1):
     df['percent'] = df['amount'] / total
     return df[df['percent'] > threshold].sort_values('percent', ascending=False)
 
-
 def calculate_support_resistance(order_book, levels=3):
     """Поиск ключевых уровней поддержки/сопротивления"""
     bids = pd.DataFrame(order_book['bids'], columns=['price', 'amount'])
     asks = pd.DataFrame(order_book['asks'], columns=['price', 'amount'])
 
-    return {
-        'support': bids.nlargest(levels, 'amount').to_dict('records'),
-        'resistance': asks.nlargest(levels, 'amount').to_dict('records')
-    }
-
+    support = bids.nlargest(levels, 'amount').to_dict('records')
+    resistance = asks.nlargest(levels, 'amount').to_dict('records')
+    return support, resistance
 
 def volume_statistics(order_book):
     """Анализ объёмов: мин/макс/среднее"""
